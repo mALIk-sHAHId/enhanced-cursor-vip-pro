@@ -52,6 +52,6 @@ This project maintains the original license terms while adding new features and 
 
 ## 🙏 Credits
 
-- Original Project: [cursor-free-vip](https://github.com/yeongpin/cursor-free-vip) by mALIk-sHAHId
-- Enhanced by: [Your GitHub Username]
+- Original Project: [cursor-free-vip](https://github.com/yeongpin/cursor-free-vip) by yeongpin
+  
 
