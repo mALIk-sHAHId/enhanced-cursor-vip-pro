@@ -1,4 +1,4 @@
-import os
+cldimport os
 import sys
 import json
 import uuid

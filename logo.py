@@ -26,11 +26,11 @@ CURSOR_LOGO = f"""
 {Fore.YELLOW}
                 Pro Version Activator v{version}
 {Fore.GREEN}
-                Author: Pin Studios | mALIk-sHAHId
+                Author: CodeCrafts | mALIk-sHAHId
 
-      Github: https://github.com/mALIk-sHAHId/cursor-free-vip
+      Github: https://github.com/mALIk-sHAHId/enhanced-cursor-vip-pro
 {Fore.RED}
-        Press 5 to change language | 按下 5 键切换语言
+        Press 8 to change language | 按下 8 键切换语言
 {Style.RESET_ALL}
     """
 
