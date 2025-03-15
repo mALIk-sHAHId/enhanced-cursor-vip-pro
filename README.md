@@ -11,10 +11,11 @@ An enhanced version of the Cursor Pro Activator with additional features and imp
 - Automatic Browser Handling
 - Smart Profile Selection
 - Lifetime Access Support
+- Command-line Authentication Support
 
 ## 🔄 Original Project
 
-This project is based on the work by [yeongpin](https://github.com/yeongpin/cursor-free-vip). The original project provided the foundation for Cursor Pro activation.
+This project is based on the work by [cursor-free-vip](https://github.com/yeongpin/cursor-free-vip). The original project provided the foundation for Cursor Pro activation.
 
 ## ✨ Enhancements Added
 
@@ -23,6 +24,7 @@ This project is based on the work by [yeongpin](https://github.com/yeongpin/curs
    - Added GitHub OAuth integration
    - Automatic profile detection and management
    - Seamless authentication flow
+   - Command-line authentication support (-auth flag)
 
 2. **User Experience**
    - Enhanced menu interface
@@ -30,6 +32,7 @@ This project is based on the work by [yeongpin](https://github.com/yeongpin/curs
    - Improved error handling
    - Progress indicators
    - Automatic browser management
+   - Silent UI modification on startup
 
 3. **Technical Improvements**
    - Unified authentication handling
@@ -37,12 +40,14 @@ This project is based on the work by [yeongpin](https://github.com/yeongpin/curs
    - Automatic cleanup
    - Better error recovery
    - Enhanced session management
+   - Command-line interface support
 
 ## 🚀 Usage
 
 1. Choose your preferred authentication method:
    - Google Account (Lifetime ACCESS)
    - GitHub Account (Lifetime ACCESS)
+   - Command-line: `cursor-vip -auth` for automatic Google authentication
 2. Follow the automatic authentication process
 3. Enjoy Cursor Pro features!
 
@@ -52,6 +57,6 @@ This project maintains the original license terms while adding new features and 
 
 ## 🙏 Credits
 
-- Original Project: [enhanced-cursor-vip-pro](https://github.com/yeongpin/cursor-free-vip) by yeongpin
+- Original Project: [cursor-free-vip](https://github.com/yeongpin/cursor-free-vip) by yeongpin
   
 
