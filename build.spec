@@ -16,7 +16,7 @@ elif system == "linux":
 else:  # Darwin
     os_type = "mac"
 
-output_name = f"CursorFreeVIP_{version}_{os_type}"
+output_name = f"CursorFree_{version}_{os_type}"
 
 a = Analysis(
     ['main.py'],
