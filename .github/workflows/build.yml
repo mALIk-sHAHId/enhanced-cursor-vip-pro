@@ -154,45 +154,12 @@ jobs:
     - name: Build in ARM64 Docker container
       run: |
         docker run --rm --platform linux/arm64 -v ${{ github.workspace }}:/app -w /app arm64v8/python:3.9-slim bash -c "
-          # Update and install dependencies
-          apt-get update && \
-          apt-get install -y \
-            build-essential \
-            zlib1g-dev \
-            libssl-dev \
-            libffi-dev \
-            python3-dev \
-            libbz2-dev \
-            liblzma-dev \
-            libsqlite3-dev \
-            libncurses5-dev \
-            libreadline6-dev \
-            libgdbm-dev \
-            libgdbm-compat-dev \
-            uuid-dev \
-            tk-dev \
-            git
-
-          # Upgrade pip and install requirements
-          python -m pip install --upgrade pip wheel setuptools
-          pip install --no-cache-dir pyinstaller
-          pip install --no-cache-dir -r requirements.txt
-
-          # Set permissions
-          chmod -R 777 /app
-
-          # Build with PyInstaller
-          python -m PyInstaller build.spec --distpath /app/dist
-
-          # Fix permissions and move file
-          chmod -R 777 /app/dist
-          if [ -f /app/dist/CursorFreeVIP_${VERSION}_linux ]; then
-            mv /app/dist/CursorFreeVIP_${VERSION}_linux /app/dist/CursorFreeVIP_${VERSION}_linux_arm64
-            chmod 755 /app/dist/CursorFreeVIP_${VERSION}_linux_arm64
-          else
-            echo 'Build failed: Output file not found'
-            exit 1
-          fi
+          apt-get update && apt-get install -y build-essential
+          pip install --upgrade pip
+          pip install pyinstaller
+          pip install -r requirements.txt
+          python -m PyInstaller build.spec
+          mv /app/dist/CursorFreeVIP_${{ env.VERSION }}_linux /app/dist/CursorFreeVIP_${{ env.VERSION }}_linux_arm64
         "
         echo "Contents of dist directory:"
         ls -la dist/
