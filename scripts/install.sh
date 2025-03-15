@@ -40,7 +40,7 @@ get_downloads_dir() {
 get_latest_version() {
     echo -e "${CYAN}ℹ️ Checking latest version...${NC}"
     local latest_release
-    latest_release=$(curl -s https://api.github.com/repos/mALIk-sHAHId/cursor-free-vip/releases/latest)
+    latest_release=$(curl -s https://api.github.com/repos/mALIk-sHAHId/enhanced-cursor-vip-pro/releases/latest)
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Cannot get latest version information${NC}"
         exit 1

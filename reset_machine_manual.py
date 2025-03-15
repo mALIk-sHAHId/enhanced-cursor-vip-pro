@@ -1,4 +1,4 @@
-cldimport os
+import os
 import sys
 import json
 import uuid
@@ -34,7 +34,7 @@ def get_cursor_paths(translator=None) -> Tuple[str, str]:
     
     # Read config file
     config = configparser.ConfigParser()
-    config_dir = os.path.join(get_user_documents_path(), ".cursor-free-vip")
+    config_dir = os.path.join(get_user_documents_path(), ".enhanced-cursor-vip-pro")
     config_file = os.path.join(config_dir, "config.ini")
     
     if not os.path.exists(config_file):
@@ -78,7 +78,7 @@ def get_cursor_machine_id_path(translator=None) -> str:
         str: Path to machineId file
     """
     # Read configuration
-    config_dir = os.path.join(get_user_documents_path(), ".cursor-free-vip")
+    config_dir = os.path.join(get_user_documents_path(), ".enhanced-cursor-vip-pro")
     config_file = os.path.join(config_dir, "config.ini")
     config = configparser.ConfigParser()
     
@@ -257,13 +257,13 @@ def modify_workbench_js(file_path: str, translator=None) -> bool:
             if sys.platform == "win32":
                 # Define replacement patterns
                 CButton_old_pattern = r'$(k,E(Ks,{title:"Upgrade to Pro",size:"small",get codicon(){return F.rocket},get onClick(){return t.pay}}),null)'
-                CButton_new_pattern = r'$(k,E(Ks,{title:"mALIk-sHAHId GitHub",size:"small",get codicon(){return F.rocket},get onClick(){return function(){window.open("https://github.com/mALIk-sHAHId/cursor-free-vip","_blank")}}}),null)'
+                CButton_new_pattern = r'$(k,E(Ks,{title:"mALIk-sHAHId GitHub",size:"small",get codicon(){return F.rocket},get onClick(){return function(){window.open("https://github.com/mALIk-sHAHId/enhanced-cursor-vip-pro","_blank")}}}),null)'
             elif sys.platform == "linux":
                 CButton_old_pattern = r'$(k,E(Ks,{title:"Upgrade to Pro",size:"small",get codicon(){return F.rocket},get onClick(){return t.pay}}),null)'
-                CButton_new_pattern = r'$(k,E(Ks,{title:"mALIk-sHAHId GitHub",size:"small",get codicon(){return F.rocket},get onClick(){return function(){window.open("https://github.com/mALIk-sHAHId/cursor-free-vip","_blank")}}}),null)'
+                CButton_new_pattern = r'$(k,E(Ks,{title:"mALIk-sHAHId GitHub",size:"small",get codicon(){return F.rocket},get onClick(){return function(){window.open("https://github.com/mALIk-sHAHId/enhanced-cursor-vip-pro","_blank")}}}),null)'
             elif sys.platform == "darwin":
                 CButton_old_pattern = r'M(x,I(as,{title:"Upgrade to Pro",size:"small",get codicon(){return $.rocket},get onClick(){return t.pay}}),null)'
-                CButton_new_pattern = r'M(x,I(as,{title:"mALIk-sHAHId GitHub",size:"small",get codicon(){return $.rocket},get onClick(){return function(){window.open("https://github.com/mALIk-sHAHId/cursor-free-vip","_blank")}}}),null)'
+                CButton_new_pattern = r'M(x,I(as,{title:"mALIk-sHAHId GitHub",size:"small",get codicon(){return $.rocket},get onClick(){return function(){window.open("https://github.com/mALIk-sHAHId/enhanced-cursor-vip-pro","_blank")}}}),null)'
 
             CBadge_old_pattern = r'<div>Pro Trial'
             CBadge_new_pattern = r'<div>Pro'
@@ -402,7 +402,7 @@ class MachineIDResetter:
         self.translator = translator
 
         # Read configuration
-        config_dir = os.path.join(get_user_documents_path(), ".cursor-free-vip")
+        config_dir = os.path.join(get_user_documents_path(), ".enhanced-cursor-vip-pro")
         config_file = os.path.join(config_dir, "config.ini")
         config = configparser.ConfigParser()
         

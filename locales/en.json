@@ -11,8 +11,24 @@
         "invalid_choice": "Invalid selection. Please enter a number from {choices}",
         "program_terminated": "Program was terminated by user",
         "error_occurred": "An error occurred: {error}. Please try again",
-        "press_enter": "Press Enter to Exit",
+        "press_enter": "Press Enter to continue...",
+        "press_continue": "Press Enter to continue...",
         "disable_auto_update": "Disable Cursor Auto-Update"
+    },
+    "main": {
+        "goodbye": "Thank you for using Cursor VIP Reset Master!",
+        "invalid_choice": "Invalid choice. Please try again.",
+        "press_continue": "Press Enter to continue...",
+        "ui_modifying": "Modifying Cursor UI...",
+        "ui_success": "UI modification completed successfully",
+        "ui_failed": "Failed to modify UI: {error}"
+    },
+    "admin": {
+        "required": "This operation requires administrator privileges.",
+        "restart_prompt": "Would you like to restart the program with admin rights?",
+        "restart_confirm": "Restart with admin rights? (Y/n)",
+        "continue_warning": "Warning: Some features may not work without admin rights.",
+        "press_continue": "Press Enter to continue without admin rights..."
     },
     "languages": {
         "en": "English",
@@ -85,7 +101,6 @@
         "check_version_failed": "Check Version Failed: {error}",
         "stack_trace": "Stack Trace",
         "version_too_low": "Cursor Version Too Low: {version} < 0.45.0"
-        
     },
     "register": {
         "title": "Cursor Registration Tool",

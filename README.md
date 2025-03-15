@@ -14,7 +14,7 @@ An enhanced version of the Cursor Pro Activator with additional features and imp
 
 ## 🔄 Original Project
 
-This project is based on the work by [mALIk-sHAHId](https://github.com/yeongpin/cursor-free-vip). The original project provided the foundation for Cursor Pro activation.
+This project is based on the work by [yeongpin](https://github.com/yeongpin/cursor-free-vip). The original project provided the foundation for Cursor Pro activation.
 
 ## ✨ Enhancements Added
 
@@ -52,6 +52,6 @@ This project maintains the original license terms while adding new features and 
 
 ## 🙏 Credits
 
-- Original Project: [cursor-free-vip](https://github.com/yeongpin/cursor-free-vip) by yeongpin
+- Original Project: [enhanced-cursor-vip-pro](https://github.com/yeongpin/cursor-free-vip) by yeongpin
   
 

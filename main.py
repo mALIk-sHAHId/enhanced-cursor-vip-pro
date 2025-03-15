@@ -10,6 +10,7 @@ import platform
 import requests
 import subprocess
 from config import get_config  
+import argparse  # Add this import at the top
 
 # Only import windll on Windows systems
 if platform.system() == 'Windows':
@@ -205,20 +206,53 @@ class Translator:
 # Create translator instance
 translator = Translator()
 
+def get_input(prompt, choices=None):
+    """Get user input with proper formatting."""
+    if choices:
+        prompt = f"{prompt} ({choices})"
+    return input(f"{Fore.CYAN}{EMOJI['ARROW']} {prompt}{Style.RESET_ALL}: ").strip()
+
 def print_menu():
     """Print the main menu."""
-    print(f"\n{Fore.CYAN}{EMOJI['MENU']} Menu:{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}1. ✅ Reset Machine ID{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}2. ✅ Register New Cursor Account{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}3. 🌟 Register with Google Account{Style.RESET_ALL}")
-    print(f"{Fore.YELLOW}   ┗━━ 🔥 LIFETIME ACCESS ENABLED 🔥{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}4. ⭐ Register with GitHub Account{Style.RESET_ALL}")
-    print(f"{Fore.YELLOW}   ┗━━ 🚀 LIFETIME ACCESS ENABLED 🚀{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}5. ✅ Manual Register{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}6. ✅ Quit Cursor{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}7. ✅ Disable Auto Update{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}8. 🌐 Change Language{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}9. ❌ Exit{Style.RESET_ALL}")
+    menu_width = 60  # Slightly increased width for better spacing
+    
+    def get_display_length(text):
+        """Calculate the display length of text, accounting for special characters"""
+        # Count emoji and special characters as 2 spaces
+        emoji_chars = '✅🌟⭐❌🌐🔥🚀'
+        length = len(text)
+        for char in text:
+            if char in emoji_chars:
+                length += 1  # Add extra space for emoji width
+        return length
+    
+    def get_padding(text):
+        display_length = get_display_length(text)
+        return menu_width - display_length - 2  # -2 for the left and right borders
+    
+    print(f"\n{Fore.CYAN}╭{'─' * menu_width}╮{Style.RESET_ALL}")
+    
+    # Menu items with their colors
+    menu_items = [
+        (f" 1. ✅ Reset Machine ID", Fore.CYAN),
+        (f" 2. ✅ Register New Cursor Account", Fore.CYAN),
+        (f" 3. 🌟 Register with Google Account", Fore.CYAN),
+        (f"    ┗━━ 🔥 LIFETIME ACCESS ENABLED 🔥", Fore.YELLOW),
+        (f" 4. ⭐ Register with GitHub Account", Fore.CYAN),
+        (f"    ┗━━ 🚀 LIFETIME ACCESS ENABLED 🚀", Fore.YELLOW),
+        (f" 5. ✅ Manual Register", Fore.CYAN),
+        (f" 6. ✅ Quit Cursor", Fore.CYAN),
+        (f" 7. ✅ Disable Auto Update", Fore.CYAN),
+        (f" 8. 🌐 Change Language", Fore.CYAN),
+        (f" 9. ❌ Exit", Fore.CYAN)
+    ]
+    
+    for text, color in menu_items:
+        padding = ' ' * get_padding(text)
+        print(f"{color}│{Style.RESET_ALL}{text}{padding}{color}│{Style.RESET_ALL}")
+    
+    print(f"{Fore.CYAN}╰{'─' * menu_width}╯{Style.RESET_ALL}")
+    print()
 
 def select_language():
     """Language selection menu"""
@@ -253,7 +287,7 @@ def check_latest_version():
             'User-Agent': 'CursorFreeVIP-Updater'
         }
         response = requests.get(
-            "https://api.github.com/repos/mALIk-sHAHId/cursor-free-vip/releases/latest",
+            "https://api.github.com/repos/mALIk-sHAHId/enhanced-cursor-vip-pro/releases/latest",
             headers=headers,
             timeout=10
         )
@@ -289,11 +323,11 @@ def check_latest_version():
             try:
                 # Execute update command based on platform
                 if platform.system() == 'Windows':
-                    update_command = 'irm https://raw.githubusercontent.com/mALIk-sHAHId/cursor-free-vip/main/scripts/install.ps1 | iex'
+                    update_command = 'irm https://raw.githubusercontent.com/mALIk-sHAHId/enhanced-cursor-vip-pro/main/scripts/install.ps1 | iex'
                     subprocess.run(['powershell', '-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', update_command], check=True)
                 else:
                     # For Linux/Mac, download and execute the install script
-                    install_script_url = 'https://raw.githubusercontent.com/mALIk-sHAHId/cursor-free-vip/main/scripts/install.sh'
+                    install_script_url = 'https://raw.githubusercontent.com/mALIk-sHAHId/enhanced-cursor-vip-pro/main/scripts/install.sh'
                     
                     # First verify the script exists
                     script_response = requests.get(install_script_url, timeout=5)
@@ -331,68 +365,115 @@ def check_latest_version():
         print(f"{Fore.YELLOW}{EMOJI['INFO']} {translator.get('updater.continue_anyway')}{Style.RESET_ALL}")
         return
 
-def main():
-    # Check for admin privileges if running as executable on Windows only
-    if platform.system() == 'Windows' and is_frozen() and not is_admin():
-        print(f"{Fore.YELLOW}{EMOJI['ADMIN']} Running as executable, administrator privileges required.{Style.RESET_ALL}")
-        if run_as_admin():
-            sys.exit(0)  # Exit after requesting admin privileges
+def handle_auth():
+    """Handle automatic authentication"""
+    try:
+        from oauth_auth import main as oauth_main
+        return oauth_main("google", translator)
+    except Exception as e:
+        print(f"\n{Fore.RED}{EMOJI['ERROR']} {str(e)}{Style.RESET_ALL}")
+        return False
+
+def handle_menu_action(choice):
+    """Handle menu selection and return True if action was successful"""
+    try:
+        if choice == "1":
+            from reset_machine_manual import main as reset_main
+            return reset_main(translator)
+        elif choice == "2":
+            from cursor_register import main as register_main
+            return register_main(translator)
+        elif choice == "3":
+            from oauth_auth import main as oauth_main
+            return oauth_main("google", translator)
+        elif choice == "4":
+            from oauth_auth import main as oauth_main
+            return oauth_main("github", translator)
+        elif choice == "5":
+            from cursor_register_manual import main as register_manual_main
+            return register_manual_main(translator)
+        elif choice == "6":
+            from quit_cursor import main as quit_main
+            return quit_main(translator)
+        elif choice == "7":
+            from disable_auto_update import main as disable_update_main
+            return disable_update_main(translator)
+        elif choice == "8":
+            return select_language()
+        elif choice == "9":
+            print(f"\n{Fore.GREEN}{EMOJI['SUCCESS']} {translator.get('main.goodbye')}{Style.RESET_ALL}")
+            sys.exit(0)
         else:
-            print(f"{Fore.YELLOW}{EMOJI['INFO']} Continuing without administrator privileges.{Style.RESET_ALL}")
-    
-    print_logo()
-    
-    # Initialize configuration
-    config = get_config(translator)
-    if not config:
-        print(f"{Fore.RED}{EMOJI['ERROR']} {translator.get('menu.config_init_failed')}{Style.RESET_ALL}")
-        return
-        
-    check_latest_version()  # Add version check before showing menu
-    print_menu()
-    
+            print(f"\n{Fore.RED}{EMOJI['ERROR']} {translator.get('main.invalid_choice')}{Style.RESET_ALL}")
+            return False
+    except Exception as e:
+        print(f"\n{Fore.RED}{EMOJI['ERROR']} {str(e)}{Style.RESET_ALL}")
+        return False
+
+def modify_cursor_ui():
+    """Modify Cursor UI to remove upgrade prompts and set custom button."""
+    try:
+        from reset_machine_manual import get_workbench_cursor_path, modify_workbench_js
+        workbench_path = get_workbench_cursor_path(translator)
+        modify_workbench_js(workbench_path, translator)
+    except:
+        pass
+
+def main():
+    """Main function."""
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Cursor VIP Reset Master')
+    parser.add_argument('-auth', action='store_true', help='Automatically run Google authentication')
+    args = parser.parse_args()
+
+    is_windows = platform.system() == 'Windows'
+    needs_admin = False
+
+    # Modify Cursor UI at startup silently
+    modify_cursor_ui()
+
+    # If -auth flag is provided, run authentication directly
+    if args.auth:
+        handle_auth()
+        sys.exit(0)
+
     while True:
+        print_logo()
+        print_menu()
+        
         try:
-            choice = input(f"\n{EMOJI['ARROW']} {Fore.CYAN}{translator.get('main.enter_choice')}: ")
+            choice = get_input(translator.get('menu.input_choice', choices="1-9"))
+            
+            if not choice.strip():
+                continue
 
-            if choice == "1":
-                from reset_machine_manual import main as reset_main
-                reset_main(translator)
-            elif choice == "2":
-                from cursor_register import main as register_main
-                register_main(translator)
-            elif choice == "3":
-                from oauth_auth import main as oauth_main
-                oauth_main("google", translator)
-            elif choice == "4":
-                from oauth_auth import main as oauth_main
-                oauth_main("github", translator)
-            elif choice == "5":
-                from cursor_register_manual import main as register_manual_main
-                register_manual_main(translator)
-            elif choice == "6":
-                from quit_cursor import main as quit_main
-                quit_main(translator)
-            elif choice == "7":
-                from disable_auto_update import main as disable_update_main
-                disable_update_main(translator)
-            elif choice == "8":
-                select_language()
-            elif choice == "9":
-                print(f"\n{Fore.GREEN}{EMOJI['SUCCESS']} {translator.get('main.goodbye')}{Style.RESET_ALL}")
-                sys.exit(0)
-            else:
-                print(f"\n{Fore.RED}{EMOJI['ERROR']} {translator.get('main.invalid_choice')}{Style.RESET_ALL}")
-
-            input(f"\n{EMOJI['INFO']} {translator.get('main.press_enter')}...")
+            # Check if the selected option needs admin rights
+            if is_windows and choice in ['1', '7']:  # Reset Machine ID or Disable Auto Update
+                if not is_admin():
+                    print(f"\n{Fore.YELLOW}{EMOJI['ADMIN']} {translator.get('admin.required')}")
+                    print(f"{Fore.YELLOW}{translator.get('admin.restart_prompt')}{Style.RESET_ALL}")
+                    confirm = get_input(translator.get('admin.restart_confirm')).lower()
+                    if confirm in ['y', 'yes']:
+                        if run_as_admin():
+                            sys.exit()
+                    else:
+                        print(f"{Fore.YELLOW}{translator.get('admin.continue_warning')}{Style.RESET_ALL}")
+                        get_input(translator.get('admin.press_continue'))
+                        continue
+            
+            # Handle the menu action
+            success = handle_menu_action(choice)
+            
+            # Only show "press enter" if the action was successful and we're not exiting
+            if success and choice != "9":
+                get_input(translator.get('main.press_continue'))
 
         except KeyboardInterrupt:
-            print(f"\n{Fore.YELLOW}{EMOJI['INFO']} {translator.get('menu.program_terminated')}{Style.RESET_ALL}")
-            print(f"{Fore.CYAN}{'═' * 50}{Style.RESET_ALL}")
-            return
+            print(f"\n{Fore.YELLOW}👋 {translator.get('main.goodbye')}{Style.RESET_ALL}")
+            sys.exit(0)
         except Exception as e:
-            print(f"{Fore.RED}{EMOJI['ERROR']} {translator.get('menu.error_occurred', error=str(e))}{Style.RESET_ALL}")
-            print_menu()
+            print(f"\n{Fore.RED}{EMOJI['ERROR']} {str(e)}{Style.RESET_ALL}")
+            get_input(translator.get('main.press_continue'))
 
 if __name__ == "__main__":
     main()

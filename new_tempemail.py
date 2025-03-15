@@ -28,7 +28,7 @@ class NewTempEmail:
     def get_blocked_domains(self):
         """Get blocked domains list"""
         try:
-            block_url = "https://raw.githubusercontent.com/mALIk-sHAHId/cursor-free-vip/main/block_domain.txt"
+            block_url = "https://raw.githubusercontent.com/mALIk-sHAHId/enhanced-cursor-vip-pro/main/block_domain.txt"
             response = requests.get(block_url, timeout=5)
             if response.status_code == 200:
                 # Split text and remove empty lines

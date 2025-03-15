@@ -7,7 +7,7 @@ from utils import get_user_documents_path, get_default_chrome_path, get_linux_cu
 def setup_config(translator=None):
     """Setup configuration file and return config object"""
     try:
-        config_dir = os.path.join(get_user_documents_path(), ".cursor-free-vip")
+        config_dir = os.path.join(get_user_documents_path(), ".enhanced-cursor-vip-pro")
         config_file = os.path.join(config_dir, "config.ini")
         os.makedirs(config_dir, exist_ok=True)
         

@@ -11,7 +11,8 @@
         "invalid_choice": "選擇無效，請輸入 {choices} 範圍內的數字",
         "program_terminated": "程式已被使用者終止",
         "error_occurred": "發生錯誤：{error}，請重試",
-        "press_enter": "按返回鍵退出",
+        "press_enter": "按返回鍵繼續...",
+        "press_continue": "按返回鍵繼續...",
         "disable_auto_update": "停用 Cursor 自動更新"
     },
     "languages": {
@@ -264,5 +265,32 @@
         "update_confirm": "是否要更新到最新版本? (Y/n)",
         "update_skipped": "跳過更新。",
         "invalid_choice": "選擇無效。請輸入 'Y' 或 'n'."
+    },
+    "oauth": {
+        "google_start": "開始 Google 認證",
+        "github_start": "開始 GitHub 認證",
+        "success": "OAuth 認證成功",
+        "failed": "OAuth 認證失敗: {error}",
+        "timeout": "認證超時",
+        "button_not_found": "未找到認證按鈕",
+        "browser_failed": "啟動瀏覽器失敗: {error}",
+        "extract_failed": "提取認證資訊失敗",
+        "auth_update_success": "認證資訊更新成功",
+        "auth_update_failed": "認證資訊更新失敗"
+    },
+    "admin": {
+        "required": "此操作需要管理員權限。",
+        "restart_prompt": "是否以管理員權限重新啟動程式？",
+        "restart_confirm": "以管理員權限重新啟動？(Y/n)",
+        "continue_warning": "警告：沒有管理員權限，某些功能可能無法使用。",
+        "press_continue": "按返回鍵繼續（無管理員權限）..."
+    },
+    "main": {
+        "goodbye": "感謝使用 Cursor VIP Reset Master！",
+        "invalid_choice": "選擇無效，請重試。",
+        "press_continue": "按返回鍵繼續...",
+        "ui_modifying": "正在修改 Cursor 介面...",
+        "ui_success": "介面修改成功完成",
+        "ui_failed": "介面修改失敗: {error}"
     }
 } 

@@ -11,7 +11,8 @@
         "invalid_choice": "选择无效，请输入 {choices} 范围内的数字",
         "program_terminated": "程序已被用户终止",
         "error_occurred": "发生错误：{error}，请重试",
-        "press_enter": "按回车键退出",
+        "press_enter": "按回车键继续...",
+        "press_continue": "按回车键继续...",
         "disable_auto_update": "禁用 Cursor 自动更新"
     },
     "languages": {
@@ -272,5 +273,32 @@
         "update_confirm": "是否要更新到最新版本? (Y/n)",
         "update_skipped": "跳过更新。",
         "invalid_choice": "选择无效。请输入 'Y' 或 'n'."
+    },
+    "oauth": {
+        "google_start": "开始 Google 认证",
+        "github_start": "开始 GitHub 认证",
+        "success": "OAuth 认证成功",
+        "failed": "OAuth 认证失败: {error}",
+        "timeout": "认证超时",
+        "button_not_found": "未找到认证按钮",
+        "browser_failed": "启动浏览器失败: {error}",
+        "extract_failed": "提取认证信息失败",
+        "auth_update_success": "认证信息更新成功",
+        "auth_update_failed": "认证信息更新失败"
+    },
+    "admin": {
+        "required": "此操作需要管理员权限。",
+        "restart_prompt": "是否以管理员权限重启程序？",
+        "restart_confirm": "以管理员权限重启？(Y/n)",
+        "continue_warning": "警告：没有管理员权限，某些功能可能无法使用。",
+        "press_continue": "按回车键继续（无管理员权限）..."
+    },
+    "main": {
+        "goodbye": "感谢使用 Cursor VIP Reset Master！",
+        "invalid_choice": "选择无效，请重试。",
+        "press_continue": "按回车键继续...",
+        "ui_modifying": "正在修改 Cursor 界面...",
+        "ui_success": "界面修改成功完成",
+        "ui_failed": "界面修改失败: {error}"
     }
 } 
