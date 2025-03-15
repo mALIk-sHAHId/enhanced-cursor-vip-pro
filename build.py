@@ -84,7 +84,7 @@ def build():
             os_type = "mac"
             ext = ""
             
-        output_name = f"CursorFreeVIP_{version}_{os_type}"
+        output_name = f"CursorFree_{version}_{os_type}"
         
         # Build command
         build_command = f'pyinstaller --clean --noconfirm build.spec'
